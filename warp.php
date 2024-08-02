@@ -56,7 +56,7 @@ function warp_unlimited($id_code) {
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $code_id = $_POST['client_id'];
     $interval = 10; 
-    $total_GB = 2;  
+    $total_GB = 10;  
 
     $total_gb = 0;
     $response_message = "";
