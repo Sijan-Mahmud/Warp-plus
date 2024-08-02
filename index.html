@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="icon" type="image/png" href="logo.jpg" type="image/x-icon"/> 
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Warp+ Unlimited</title>
+    <script>
+        function submitForm(event) {
+            event.preventDefault();
+
+            document.getElementById('sendingMessage').style.display = 'block'; // Show sending message
+
+            var client_id = document.getElementById('client_id').value;
+            var xhr = new XMLHttpRequest();
+            xhr.open("POST", "warp.php", true);
+            xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+
+            xhr.onreadystatechange = function() {
+                if (xhr.readyState === XMLHttpRequest.DONE) {
+                    document.getElementById('sendingMessage').style.display = 'none'; // Hide sending message
+                    var status = xhr.status;
+                    if (status === 0 || (status >= 200 && status < 400)) {
+                        // The request was successful
+                        document.getElementById('responseMessage').innerHTML = xhr.responseText;
+                    } else {
+                        // The request failed
+                        document.getElementById('responseMessage').innerHTML = 'An error occurred.';
+                    }
+                }
+            };
+
+            xhr.send("client_id=" + encodeURIComponent(client_id));
+        }
+    </script>
+</head>
+<body>
+    <img class="bg" src="bg-03.jpg" alt="Background Image">   
+    <div class="main-body">
+        <img class="logo" src="image.png" alt="Logo Image">
+        <h1>WarpX</h1>
+        <form id="smsForm" onsubmit="submitForm(event);">
+            <input type="text" class="data-input" id="client_id" name="client_id" placeholder="Enter Warp Client ID" required>
+            <br>
+            <br>
+            <button type="submit" class="btn" id="sendBtn">Send</button>
+        </form>
+        <br>
+        <br>
+        <div id="sendingMessage" style="display: none; color: orange;">Sending Request...</div>
+        <div id="responseMessage" style="color: rgb(8, 155, 229);"></div>
+        <div class="info">Get Unlimited Warp+ Data For 1.1.1.1 VPN</div>
+        <br>
+        <div class="info">Developed by Root of Cyber Team</div>
+    </div>
+</body>
+</html>
